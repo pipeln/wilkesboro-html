@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>All News - Wilkesboro Today</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    .news-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <a href="/" class="logo">
+        <div class="logo-icon">W</div>
+        <div class="logo-text">Wilkesboro<span>Today</span></div>
+      </a>
+      <nav class="nav">
+        <a href="/" class="nav-link">Home</a>
+        <a href="/news.html" class="nav-link active">News</a>
+        <a href="/events.html" class="nav-link">Events</a>
+        <a href="/jobs.html" class="nav-link">Jobs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <h1 class="section-title" style="margin-bottom: 1.5rem;">All News</h1>
+      <div id="all-news" class="news-list">
+        <div class="loading">Loading news...</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Wilkesboro Today</p>
+      <p class="footer-sub">Serving Wilkes County, NC</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script>
+    async function loadAllNews() {
+      const container = document.getElementById('all-news');
+      
+      try {
+        const { data, error } = await supabase
+          .from('news_items')
+          .select('*')
+          .eq('status', 'Approved')
+          .order('published_date', { ascending: false });
+        
+        if (error) throw error;
+        
+        if (data && data.length > 0) {
+          container.innerHTML = data.map(article => `
+            <article class="news-card">
+              <div class="news-image"></div>
+              <div class="news-content">
+                <span class="category-small">${article.category}</span>
+                <h3 class="news-title">${article.headline}</h3>
+                <p class="news-summary">${article.summary}</p>
+                <div class="meta">${article.source} &bull; ${new Date(article.published_date).toLocaleDateString()}</div>
+              </div>
+            </article>
+          `).join('');
+        } else {
+          container.innerHTML = '<div class="empty">No news articles available</div>';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        container.innerHTML = '<div class="error">Failed to load news</div>';
+      }
+    }
+    
+    document.addEventListener('DOMContentLoaded', loadAllNews);
+  </script>
+</body>
+</html>

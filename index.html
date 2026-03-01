@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wilkesboro Today - Local News, Events & Resources</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <a href="/" class="logo">
+        <div class="logo-icon">W</div>
+        <div class="logo-text">Wilkesboro<span>Today</span></div>
+      </a>
+      <nav class="nav">
+        <a href="/" class="nav-link active">Home</a>
+        <a href="/news.html" class="nav-link">News</a>
+        <a href="/events.html" class="nav-link">Events</a>
+        <a href="/jobs.html" class="nav-link">Jobs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="container">
+      <div class="grid">
+        <!-- Main Content -->
+        <div class="main-content">
+          <!-- Featured Article -->
+          <div id="featured-article" class="featured">
+            <div class="loading">Loading featured article...</div>
+          </div>
+
+          <!-- Latest News -->
+          <div class="latest-section">
+            <h2 class="section-title">Latest News</h2>
+            <div id="latest-news" class="news-grid">
+              <div class="loading">Loading news...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+          <!-- Weather Widget -->
+          <div class="widget">
+            <h3 class="widget-title">Weather</h3>
+            <div id="weather">
+              <div class="loading">Loading weather...</div>
+            </div>
+          </div>
+
+          <!-- Quick Links -->
+          <div class="widget">
+            <h3 class="widget-title">Quick Links</h3>
+            <ul class="quick-links">
+              <li><a href="/news.html">All News</a></li>
+              <li><a href="/events.html">Events Calendar</a></li>
+              <li><a href="/jobs.html">Job Board</a></li>
+              <li><a href="/resources.html">Community Resources</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2026 Wilkesboro Today. All rights reserved.</p>
+      <p class="footer-sub">Serving Wilkes County, NC</p>
+    </div>
+  </footer>
+
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
